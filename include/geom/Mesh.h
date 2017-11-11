@@ -21,6 +21,7 @@ namespace veteris {
             return vs;
         }
     };
+    
     struct Mesh {
         std::vector<Triangle> triangles;
 
