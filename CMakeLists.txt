@@ -3,8 +3,9 @@ set(EXECUTABLE_NAME veteris)
 project(${EXECUTABLE_NAME})
 
 set(CMAKE_CXX_STANDARD 17)
+include_directories(src include)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp include/geom/Matrix.h include/geom/Point.h include/geom/Vector.h include/geom/Normal.h include/geom/Transform.h include/geom/Box.h include/geom/Mesh.h)
 add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
 
 
