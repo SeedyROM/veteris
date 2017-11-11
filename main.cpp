@@ -7,11 +7,11 @@
 
 using namespace veteris;
 
+static float DIST = 1.666;
 
 int main() {
 
     //auto t = Transform3::rotate(0, 0, (float)M_PI / 2.f);
-    auto t = Transform3::scale(200, 200, 200);
 
     Mesh cube;
     cube.triangles.push_back(
@@ -35,6 +35,7 @@ int main() {
                     Point3(1, 1, 1)
             )
     );
+    auto t = Transform3::scale(100, 100, 200);
     cube.transform(t);
 
     sf::ContextSettings settings;
@@ -43,8 +44,8 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Veretis", sf::Style::Default, settings);
     window.setFramerateLimit(120);
 
-    float cx = window.getSize().x / 2;
-    float cy = window.getSize().y / 2;
+    sf::RenderTexture s;
+    s.create(window.getSize().x / DIST, window.getSize().y / DIST);
 
     while(window.isOpen()) {
         sf::Event e;
@@ -54,10 +55,18 @@ int main() {
             }
         }
 
-        window.clear(sf::Color(244, 120, 24));
+        s.clear(sf::Color(0, 0, 0, 0));
         for(auto t : cube.triangles) {
-            window.draw(t);
+            s.draw(t);
         }
+        s.display();
+
+        window.clear(sf::Color(244, 120, 24));
+
+        sf::Sprite sprite(s.getTexture());
+        sprite.setScale(DIST, DIST);
+        window.draw(sprite);
+
         window.display();
 
         cube.transform(Transform3::rotate(0.0001, 0.002, 0.003));
