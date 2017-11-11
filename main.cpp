@@ -8,17 +8,17 @@
 using namespace veteris;
 
 
-
 int main() {
+
     //auto t = Transform3::rotate(0, 0, (float)M_PI / 2.f);
     auto t = Transform3::scale(200, 200, 200);
 
     Mesh cube;
     cube.triangles.push_back(
             Triangle(
-                    Point3(0, 0, 0),
-                    Point3(0, 1, 0),
-                    Point3(1, 0, 0)
+                    Point3(0.0f, 0.0f, 0.0f),
+                    Point3(0.0f, 1.0f, 0.0f),
+                    Point3(1.0f, 0.0f, 0.0f)
             )
     );
     cube.triangles.push_back(
@@ -57,9 +57,9 @@ int main() {
         window.clear(sf::Color(244, 120, 24));
         for(auto t : cube.triangles) {
             sf::Vertex tri[] = {
-                    sf::Vertex(t.v0.asVector2f(cx, cy), t.color),
-                    sf::Vertex(t.v1.asVector2f(cx, cy), sf::Color(255, 50, 0)),
-                    sf::Vertex(t.v2.asVector2f(cx, cy), sf::Color(0, 240, 120))
+                    sf::Vertex(t.v0, t.color),
+                    sf::Vertex(t.v1, sf::Color(255, 50, 0)),
+                    sf::Vertex(t.v2, sf::Color(0, 240, 120))
             };
             window.draw(tri, 3, sf::Triangles);
         }

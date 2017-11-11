@@ -3,45 +3,29 @@
 #include <iostream>
 #include <cmath>
 
+#include "Base.h"
 #include "Vector.h"
 
-namespace veteris
-{
-    class Normal3
-    {
-    public:
-        float X, Y, Z;
-        Normal3(float x, float y, float z)
-                : X(x), Y(y), Z(z) {}
-        Normal3(const Vector3 &v)
-                : X(v.X), Y(v.Y), Z(v.Z) {}
-        float operator [] (int i) const
-        {
-            return (&X)[i];
+namespace veteris {
+    struct Normal3 : public BaseVector3 {
+        using BaseVector3::BaseVector3;
+
+        float length_squared() const {
+            return x*x + y*y + z*z;
         }
-        float &operator [] (int i)
-        {
-            return (&X)[i];
-        }
-        float length_squared() const
-        {
-            return X*X + Y*Y + Z*Z;
-        }
-        float length() const
-        {
+        float length() const {
             return sqrtf(length_squared());
         }
-        void normalize()
-        {
-            float inv = 1.F / length();
-            X *= inv;
-            Y *= inv;
-            Z *= inv;
+        void normalize() {
+            float inv = 1.0f / length();
+            x *= inv;
+            y *= inv;
+            z *= inv;
         }
     };
-    inline std::ostream &operator << (std::ostream &os, const Normal3 &n)
-    {
-        os << "[" << n.X << "," << n.Y << "," << n.Z << "]";
+
+    inline std::ostream &operator << (std::ostream &os, const Normal3 &n) {
+        os << "[" << n.x << ", " << n.y << ", " << n.z << "]";
         return os;
     }
 }
