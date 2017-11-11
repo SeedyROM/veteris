@@ -11,9 +11,8 @@
 
 namespace veteris
 {
-    class Transform3
+    struct Transform3
     {
-    public:
         Matrix4x4 matrix, inverse;
         Transform3() : matrix(), inverse() {}
         Transform3(const Matrix4x4 &m, const Matrix4x4 &i) :

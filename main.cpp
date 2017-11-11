@@ -41,7 +41,7 @@ int main() {
     settings.antialiasingLevel = 8;
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "Veretis", sf::Style::Default, settings);
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(120);
 
     float cx = window.getSize().x / 2;
     float cy = window.getSize().y / 2;

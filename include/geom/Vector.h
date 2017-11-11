@@ -5,20 +5,15 @@
 
 namespace veteris
 {
-    class Point3;
-    class Normal3;
-    class Vector3
+    struct Point3;
+    struct Normal3;
+    struct Vector3
     {
-    public:
         float x, y, z;
         Vector3(float x, float y, float z)
                 : x(x), y(y), z(z) {}
         Vector3(const Vector3 &v)
                 : x(v.x), y(v.y), z(v.z) {}
-//        Vector3(const Point3 &from, const Point3 &to)
-//                : x(to.x - from.x), y(to.y - from.y), z(to.z - from.z) {}
-//        Vector3(const Normal3 &n)
-//                : x(n.x), y(n.y), z(n.z) {}
         float &operator [] (int i) {
             return (&x)[i];
         }

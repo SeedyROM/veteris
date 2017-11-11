@@ -6,8 +6,7 @@
 #include "Point.h"
 
 namespace veteris {
-    class Box3 {
-    public:
+    struct Box3 {
         Point3 min, max;
         Box3() : min(INFINITY, INFINITY, INFINITY), max(-INFINITY, -INFINITY, -INFINITY) {}
         Box3(const Point3 &p) : min(p), max(p) {}
