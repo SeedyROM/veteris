@@ -56,16 +56,11 @@ int main() {
 
         window.clear(sf::Color(244, 120, 24));
         for(auto t : cube.triangles) {
-            sf::Vertex tri[] = {
-                    sf::Vertex(t.v0, t.color),
-                    sf::Vertex(t.v1, sf::Color(255, 50, 0)),
-                    sf::Vertex(t.v2, sf::Color(0, 240, 120))
-            };
-            window.draw(tri, 3, sf::Triangles);
+            window.draw(t);
         }
         window.display();
 
-        cube.transform(Transform3::rotate(0.001, 0.002, 0.003));
+        cube.transform(Transform3::rotate(0.0001, 0.002, 0.003));
     }
 
     return 0;
