@@ -8,17 +8,17 @@
 using namespace veteris;
 
 
-
 int main() {
+
     //auto t = Transform3::rotate(0, 0, (float)M_PI / 2.f);
-    auto t = Transform3::scale(100, 100, 100);
+    auto t = Transform3::scale(200, 200, 200);
 
     Mesh cube;
     cube.triangles.push_back(
             Triangle(
-                    Point3(0, 0, 0),
-                    Point3(0, 1, 0),
-                    Point3(1, 0, 0)
+                    Point3(0.0f, 0.0f, 0.0f),
+                    Point3(0.0f, 1.0f, 0.0f),
+                    Point3(1.0f, 0.0f, 0.0f)
             )
     );
     cube.triangles.push_back(
@@ -37,7 +37,10 @@ int main() {
     );
     cube.transform(t);
 
-    sf::RenderWindow window(sf::VideoMode(600, 400), "Veteris");
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 8;
+
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Veretis", sf::Style::Default, settings);
     window.setFramerateLimit(60);
 
     float cx = window.getSize().x / 2;
@@ -53,22 +56,11 @@ int main() {
 
         window.clear(sf::Color(244, 120, 24));
         for(auto t : cube.triangles) {
-//            sf::ConvexShape s;
-//            s.setFillColor(sf::Color(255,255,255));
-//            s.setPointCount(3);
-//            s.setPoint(0, t.v0.asVector2f(cx, cy));
-//            s.setPoint(1, t.v1.asVector2f(cx, cy));
-//            s.setPoint(2, t.v2.asVector2f(cx, cy));
-            sf::Vertex tri[] = {
-                    sf::Vertex(t.v0.asVector2f(cx, cy), t.color),
-                    sf::Vertex(t.v1.asVector2f(cx, cy), t.color),
-                    sf::Vertex(t.v2.asVector2f(cx, cy), t.color)
-            };
-            window.draw(tri, 3, sf::Triangles);
+            window.draw(t);
         }
         window.display();
 
-        cube.transform(Transform3::rotate(0.001, 0.002, 0.003));
+        cube.transform(Transform3::rotate(0.0001, 0.002, 0.003));
     }
 
     return 0;

@@ -3,42 +3,23 @@
 #include <cmath>
 #include <iostream>
 
-#include <SFML/Graphics.hpp>
+#include "Base.h"
 
 namespace veteris {
-    class Point3
-    {
-    public:
-        float X, Y, Z;
-        Point3() : X(0.F), Y(0.F), Z(0.F) {}
-        Point3(float x, float y, float z) : X(x), Y(y), Z(z) {}
-        Point3(const Point3 &p) : X(p.X), Y(p.Y), Z(p.Z) {}
-        float operator [] (int i) const
-        {
-            return (&X)[i];
+    struct Point3 : BaseVector3 {
+        using BaseVector3::BaseVector3;
+
+        float distance_squared(const Point3& p) const {
+            const float tx = x - p.x;
+            const float ty = y - p.y;
+            const float tz = z - p.z;
         }
-        float &operator [] (int i)
-        {
-            return (&X)[i];
-        }
-        float distance_squared(const Point3 &p) const
-        {
-            float tx = X - p.X;
-            float ty = Y - p.Y;
-            float tz = Z - p.Z;
-            return tx*tx + ty*ty + tz*tz;
-        }
-        float distance(const Point3 &p) const
-        {
-            return sqrtf(distance_squared(p));
-        }
-        sf::Vector2f asVector2f(float cx, float cy) {
-            return sf::Vector2f(X + cx, Y + cy);
+        float distance(const Point3& p) const {
+            return std::sqrt(distance_squared(p));
         }
     };
-    inline std::ostream &operator << (std::ostream &os, const Point3 &p)
-    {
-        os << "[" << p.X << "," << p.Y << "," << p.Z << "]";
+    inline std::ostream& operator<< (std::ostream &os, const Point3 &p) {
+        os << "[" << p.x << ", " << p.y << ", " << p.z << "]";
         return os;
     }
 }
